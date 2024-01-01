@@ -1,4 +1,3 @@
-
 #include <IBusBM.h>
 IBusBM ibus;
 
@@ -31,6 +30,10 @@ int enB = 3;
 int in3 = 4;
 int in4 = 5;
 
+// leds
+int ledWhite = 13;
+int ledRed = 12;
+
 //-------------------------------------------------------------------------------
 void setup() {
   pinMode(enA, OUTPUT);
@@ -44,6 +47,12 @@ void setup() {
 
   // Attach iBus object to serial port
   ibus.begin(Serial,1);
+
+  pinMode(ledWhite, OUTPUT);
+  pinMode(ledRed, OUTPUT);
+
+  digitalWrite(ledWhite, LOW);
+  digitalWrite(ledRed, LOW);
 
 }
 
@@ -77,6 +86,9 @@ int rcCH3 = readChannel(2, 0, 255, 125);
         digitalWrite(in3, LOW);
         digitalWrite(in4, HIGH);
         analogWrite(enB, speed);  
+
+        digitalWrite(ledWhite, LOW);
+        digitalWrite(ledRed, LOW);
      
   }
   else  if (rcCH1 < -50) 
@@ -91,6 +103,9 @@ int rcCH3 = readChannel(2, 0, 255, 125);
         digitalWrite(in3, HIGH);
         digitalWrite(in4, LOW);
         analogWrite(enB, speed); 
+        
+        digitalWrite(ledWhite, LOW);
+        digitalWrite(ledRed, LOW);
   }
   else if (rcCH2 > 50) 
   {
@@ -104,6 +119,9 @@ int rcCH3 = readChannel(2, 0, 255, 125);
         digitalWrite(in3, HIGH);
         digitalWrite(in4, LOW);
         analogWrite(enB, speed);  
+
+        digitalWrite(ledWhite, HIGH);
+        digitalWrite(ledRed, LOW);
      
   }
   else  if (rcCH2 < -50) 
@@ -118,6 +136,9 @@ int rcCH3 = readChannel(2, 0, 255, 125);
         digitalWrite(in3, LOW);
         digitalWrite(in4, HIGH);
         analogWrite(enB, speed); 
+
+        digitalWrite(ledWhite, LOW);
+        digitalWrite(ledRed, HIGH);
   }
   else 
   {
@@ -132,7 +153,10 @@ int rcCH3 = readChannel(2, 0, 255, 125);
         digitalWrite(in3, LOW);
         digitalWrite(in4, LOW);
         analogWrite(enB, speed); 
-    
+       
+       digitalWrite(ledWhite, LOW);
+       digitalWrite(ledRed, LOW);
+       
   }
   Serial.println( speed);
   
